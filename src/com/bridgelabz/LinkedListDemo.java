@@ -87,6 +87,20 @@ class LinkedList {
             head = head.next;
         }
     }
+    public void popLast(){
+        if(head == null) {
+            System.out.println("Linked List is Empty.");
+        }  else{
+            Node second_last = head;
+           // Created an extra space secondLast, and traverse the linked list till the second last node and set the value of the next second-last node to null..
+           // delete the last node, i.e. the next node of the second last node
+            while (second_last.next.next != null)
+                second_last = second_last.next;
+
+            // Change next of second last
+            second_last.next = null;
+        }
+    }
 }
 
 
@@ -99,7 +113,7 @@ class LinkedList {
             int choice;
             do {
                 System.out.println("\n 1.Insert Data from Start \n 2.Insert Data from last \n 3.Show Linked List \n 4.Insert Data at Random Position \n 5.Delete first data " +
-                        "\n 6.Quit");
+                        "\n 6.Delete last Data \n 7.Quit");
                 choice = sc.nextInt();
                 switch (choice) {
                     case 1:
@@ -126,10 +140,13 @@ class LinkedList {
                      linkedList.pop();
                      break;
                     case 6:
+                        linkedList.popLast();
+                        break;
+                    case 7:
                         System.out.println("Thank you");
                         break;
                 }
-            } while (choice != 6);
+            } while (choice != 7);
 
         }
     }

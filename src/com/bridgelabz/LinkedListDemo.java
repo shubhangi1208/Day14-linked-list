@@ -79,21 +79,23 @@ class LinkedList {
             }
         }
     }
+
     //Delete first node from Linked List
     public void pop() {
-        if(head == null) {
+        if (head == null) {
             System.out.println("Linked List is Empty.");
         } else {
             head = head.next;
         }
     }
-    public void popLast(){
-        if(head == null) {
+
+    public void popLast() {
+        if (head == null) {
             System.out.println("Linked List is Empty.");
-        }  else{
+        } else {
             Node second_last = head;
-           // Created an extra space secondLast, and traverse the linked list till the second last node and set the value of the next second-last node to null..
-           // delete the last node, i.e. the next node of the second last node
+            // Created an extra space secondLast, and traverse the linked list till the second last node and set the value of the next second-last node to null..
+            // delete the last node, i.e. the next node of the second last node
             while (second_last.next.next != null)
                 second_last = second_last.next;
 
@@ -101,9 +103,20 @@ class LinkedList {
             second_last.next = null;
         }
     }
+
+    public boolean search(Node head, int x) {
+        Node current = head;    //Initialize current
+        while (current != null) {
+            if (current.data == x)
+                return true;
+            current = current.next;
+
+        }
+        return false;  //data not found
+
+    }
+
 }
-
-
     public class LinkedListDemo {
 
         public static void main(String[] args) {
@@ -113,7 +126,7 @@ class LinkedList {
             int choice;
             do {
                 System.out.println("\n 1.Insert Data from Start \n 2.Insert Data from last \n 3.Show Linked List \n 4.Insert Data at Random Position \n 5.Delete first data " +
-                        "\n 6.Delete last Data \n 7.Quit");
+                        "\n 6.Delete last Data \n 7.Search Node \n 8.Quit");
                 choice = sc.nextInt();
                 switch (choice) {
                     case 1:
@@ -143,6 +156,16 @@ class LinkedList {
                         linkedList.popLast();
                         break;
                     case 7:
+                        System.out.println("Enter the number ");
+                        int searchnumber= sc.nextInt();
+                        if (linkedList.search(linkedList.head,searchnumber))
+                        {
+                            System.out.println(" \n Yes. Element is Found");
+                        }
+                        else
+                            System.out.println("\n No. Element is not found");
+                        break;
+                    case 8:
                         System.out.println("Thank you");
                         break;
                 }

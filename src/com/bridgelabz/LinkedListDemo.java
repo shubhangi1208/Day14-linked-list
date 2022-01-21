@@ -74,7 +74,6 @@ class LinkedList {
                     temp.next = newNode;
                     newNode.next = nextNode;
                 }
-//                System.out.print(temp.data + " -> ");
                 temp = temp.next;
             }
         }
@@ -96,8 +95,7 @@ class LinkedList {
             Node second_last = head;
             // Created an extra space secondLast, and traverse the linked list till the second last node and set the value of the next second-last node to null..
             // delete the last node, i.e. the next node of the second last node
-            while (second_last.next.next != null)
-                second_last = second_last.next;
+            while (second_last.next.next != null) second_last = second_last.next;
 
             // Change next of second last
             second_last.next = null;
@@ -107,8 +105,7 @@ class LinkedList {
     public boolean search(Node head, int x) {
         Node current = head;    //Initialize current
         while (current != null) {
-            if (current.data == x)
-                return true;
+            if (current.data == x) return true;
             current = current.next;
 
         }
@@ -116,63 +113,97 @@ class LinkedList {
 
     }
 
-}
-    public class LinkedListDemo {
-
-        public static void main(String[] args) {
-
-            Scanner sc = new Scanner(System.in);
-            LinkedList linkedList = new LinkedList();
-            int choice;
-            do {
-                System.out.println("\n 1.Insert Data from Start \n 2.Insert Data from last \n 3.Show Linked List \n 4.Insert Data at Random Position \n 5.Delete first data " +
-                        "\n 6.Delete last Data \n 7.Search Node \n 8.Quit");
-                choice = sc.nextInt();
-                switch (choice) {
-                    case 1:
-                        System.out.println("Enter the number");
-                        int firstnumber = sc.nextInt();
-                        linkedList.insertFirst(firstnumber);
-                        break;
-                    case 2:
-                        System.out.println("Enter the number");
-                        int lastnumber = sc.nextInt();
-                        linkedList.insertLast(lastnumber);
-                        break;
-                    case 3:
-                        linkedList.showList();
-                        break;
-                    case 4:
-                        System.out.println("Enter the number after which you want to add the new number ");
-                        int newdata=sc.nextInt();
-                        System.out.println("Enter the New number ");
-                        int data= sc.nextInt();
-                        linkedList.insertafter(data,newdata);
-                        break;
-                     case 5:
-                     linkedList.pop();
-                     break;
-                    case 6:
-                        linkedList.popLast();
-                        break;
-                    case 7:
-                        System.out.println("Enter the number ");
-                        int searchnumber= sc.nextInt();
-                        if (linkedList.search(linkedList.head,searchnumber))
-                        {
-                            System.out.println(" \n Yes. Element is Found");
-                        }
-                        else
-                            System.out.println("\n No. Element is not found");
-                        break;
-                    case 8:
-                        System.out.println("Thank you");
-                        break;
+    //Delete specific Node
+    public void deleteNode(int data) {
+        if (head == null) {
+            System.out.println("Linked List is Empty.");
+        } else {
+            if (data == head.data) {
+                head = head.next;
+            } else {
+                Node prevNode = head;
+                Node temp = head.next;
+                while (prevNode != null) {
+                    if (temp.data == data) {
+                        prevNode.next = temp.next;
+                    }
+                    prevNode = prevNode.next;
+                    temp = temp.next;
                 }
-            } while (choice != 7);
-
+            }
         }
     }
+
+    //Size of Linkedlist
+    public int getCount() {
+        Node temp = head;
+        int count = 0;
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+        return count;
+    }
+}
+
+public class LinkedListDemo {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        LinkedList linkedList = new LinkedList();
+        int choice;
+        do {
+            System.out.println("\n 1.Insert Data from Start \n 2.Insert Data from last \n 3.Show Linked List \n 4.Insert Data at any Random Position \n 5.Delete first data " + "\n 6.Delete last Data " +
+                    "\n 7.Search Node \n 8.Delete Data at any Random Position \n 9.Quit");
+            choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter the number");
+                    int firstnumber = sc.nextInt();
+                    linkedList.insertFirst(firstnumber);
+                    break;
+                case 2:
+                    System.out.println("Enter the number");
+                    int lastnumber = sc.nextInt();
+                    linkedList.insertLast(lastnumber);
+                    break;
+                case 3:
+                    linkedList.showList();
+                    break;
+                case 4:
+                    System.out.println("Enter the number after which you want to add the new number ");
+                    int newdata = sc.nextInt();
+                    System.out.println("Enter the New number ");
+                    int data = sc.nextInt();
+                    linkedList.insertafter(data, newdata);
+                    break;
+                case 5:
+                    linkedList.pop();
+                    break;
+                case 6:
+                    linkedList.popLast();
+                    break;
+                case 7:
+                    System.out.println("Enter the number ");
+                    int searchnumber = sc.nextInt();
+                    if (linkedList.search(linkedList.head, searchnumber)) {
+                        System.out.println(" \n Yes. Element is Found");
+                    } else System.out.println("\n No. Element is not found");
+                    break;
+                case 8:
+                    System.out.println("Enter the number which you want to Delete ");
+                    int removenumber = sc.nextInt();
+                    linkedList.deleteNode(removenumber);
+                    break;
+                case 9:
+                    System.out.println("Thank you");
+                    break;
+            }
+        } while (choice != 9);
+
+    }
+}
 
 
 
